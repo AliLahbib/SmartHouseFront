@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2>{{ isEditing ? 'Modifier Pièce' : 'Créer Pièce' }}</h2>
+
+  <form [formGroup]="pieceForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input id="name" class="form-control" formControlName="name" />
+    </div>
+
+    <div class="form-group">
+      <label for="type">Type</label>
+      <input id="type" class="form-control" formControlName="type" />
+    </div>
+
+    <div class="form-group">
+      <label for="floor">Étage</label>
+      <select  name="floor" id="floor" formControlName="floor">
+        <option value="0">0</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+      </select>
+
+    </div>
+
+
+
+    <button type="submit" class="btn btn-success mt-3" [disabled]="pieceForm.invalid">
+      {{ isEditing ? 'Mettre à jour' : 'Créer' }}
+    </button>
+  </form>
+</div>

@@ -1,0 +1,46 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2>Liste des utilisateurs</h2>
+    <button class="btn btn-primary" (click)="createUser()">Créer un utilisateur</button>
+  </div>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>Nom d'utilisateur</th>
+      <th>Email</th>
+      <th>Rôle</th>
+      <th>Pièces associées</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.username }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.role }}</td>
+      <td>
+        <ul *ngIf="user.pieces && user.pieces.length > 0; else noPieces">
+          <li *ngFor="let piece of user.pieces"> {{ piece.name }} : floor {{piece.floor}} </li>
+        </ul>
+        <ng-template #noPieces>
+          <span>Pas de pièces associées</span>
+        </ng-template>
+      </td>
+
+      <td>
+        <button class="btn btn-sm btn-warning me-2" (click)="editUser(user)">
+          Modifier
+        </button>
+        <button class="btn btn-sm btn-danger" (click)="deleteUser(user._id)">
+          Supprimer
+        </button>
+      </td>
+    </tr>
+    <tr *ngIf="users.length === 0">
+      <td colspan="5" class="text-center">Aucun utilisateur trouvé</td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+

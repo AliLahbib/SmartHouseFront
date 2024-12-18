@@ -1,0 +1,47 @@
+<div class="container mt-4">
+  <h2>Gestion des Pièces</h2>
+  <button class="btn btn-primary mb-3" (click)="createPiece()">Ajouter une Pièce</button>
+
+  <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+    <tr>
+      <th>Nom</th>
+      <th>Type</th>
+      <th>Étage</th>
+      <th>Propiétaires</th>
+      <th>Appareils</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let piece of pieces">
+      <td>{{ piece.name }}</td>
+      <td>{{ piece.type }}</td>
+      <td>{{ piece.floor }}</td>
+      <td>
+        <ul *ngIf="piece.users && piece.users.length> 0; else noPieces">
+          <li *ngFor="let user of piece.users"> {{ user.username }}  </li>
+        </ul>
+        <ng-template #noPieces>
+          <span>Pas de pièces associées</span>
+        </ng-template>
+      </td>
+      <td>
+        <ul *ngIf="piece.devices && piece.devices.length> 0; else noPieces">
+          <li *ngFor="let device of piece.devices"> {{ device.name }}  </li>
+        </ul>
+        <ng-template #noPieces>
+          <span>Pas d'Appareils associées</span>
+        </ng-template>
+      </td>
+      <td>
+        <button class="btn btn-sm btn-warning me-2" (click)="editPiece(piece._id)">Modifier</button>
+        <button class="btn btn-sm btn-danger" (click)="deletePiece(piece._id)">Supprimer</button>
+      </td>
+    </tr>
+    <tr *ngIf="pieces.length === 0">
+      <td colspan="4" class="text-center">Aucune pièce trouvée</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <h2>{{ isEditing ? 'Modifier Appareil' : 'Créer Appareil' }}</h2>
+
+  <form [formGroup]="deviceForm" (ngSubmit)="onSubmit()">
+    <!-- Nom du dispositif -->
+    <div class="form-group">
+      <label for="name">Nom</label>
+      <input id="name" class="form-control" formControlName="name" />
+      <div *ngIf="deviceForm.get('name')?.invalid && deviceForm.get('name')?.touched" class="text-danger">
+        Le nom du dispositif est requis.
+      </div>
+    </div>
+
+    <!-- Statut -->
+
+
+
+
+    <!-- Type de dispositif -->
+    <div class="form-group">
+      <label for="type">Type</label>
+      <input id="type" class="form-control" formControlName="type" />
+      <div *ngIf="deviceForm.get('type')?.invalid && deviceForm.get('type')?.touched" class="text-danger">
+        Le type de dispositif est requis.
+      </div>
+    </div>
+
+    <!-- Paramètres spécifiques -->
+    <div formGroupName="specificParams">
+      <div class="form-group">
+        <label for="color">Couleur</label>
+        <input id="color" class="form-control" formControlName="color" />
+      </div>
+      <div class="form-group">
+        <label for="powerConsumption">Consommation (par defaut 10 W/s) </label>
+        <input
+          id="powerConsumption"
+          type="number"
+          class="form-control"
+          formControlName="powerConsumption"
+        />
+        <div
+          *ngIf="deviceForm.get('specificParams.powerConsumption')?.invalid && deviceForm.get('specificParams.powerConsumption')?.touched"
+          class="text-danger"
+        >
+          La consommation doit être un nombre positif.
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="room">Pièce associée</label>
+      <select id="room" class="form-control" formControlName="room">
+        <option  value="">Aucune pièce</option>
+        <option *ngFor="let piece of pieces" [value]="piece._id" >{{ piece.name }}</option>
+      </select>
+    </div>
+
+    <!-- Bouton de soumission -->
+    <button type="submit" class="btn btn-success mt-3" [disabled]="deviceForm.invalid">
+      {{ isEditing ? 'Mettre à jour' : 'Créer' }}
+    </button>
+  </form>
+</div>
