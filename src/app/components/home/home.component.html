@@ -1,1 +1,67 @@
-<p>home works!</p>
+<div class="container mt-4">
+  <h1 class="text-center mb-5">Welcome to SmartHouse</h1>
+
+  <div class="row g-4">
+    <!-- Section User -->
+    <div *ngIf="isAdmin()" class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="me-3">
+              <i class="bi bi-people-fill display-4 text-primary"></i>
+            </div>
+            <div>
+              <h5 class="card-title">Users</h5>
+              <p class="card-text">Number of users : <strong>{{ userCount }}</strong></p>
+            </div>
+          </div>
+        </div>
+        <div  class="card-footer text-end">
+          <a routerLink="/users" class="btn btn-primary btn-sm">users management</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section pieces -->
+    <div *ngIf="isAdmin()||isTechnician()" class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="me-3">
+              <i class="bi bi-house-fill display-4 text-success"></i>
+            </div>
+            <div>
+              <h5 class="card-title">Pièces</h5>
+              <p class="card-text">Number of pieces : <strong>{{ pieceCount }}</strong></p>
+            </div>
+          </div>
+        </div>
+        <div  class="card-footer text-end">
+          <a routerLink="/pieces" class="btn btn-success btn-sm">pieces management</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section Appareils -->
+    <div *ngIf="isAdmin()||isTechnician()||isUser()" class="col-md-4">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <div class="me-3">
+              <i class="bi bi-lightbulb-fill display-4 text-warning"></i>
+            </div>
+            <div>
+              <h5 class="card-title">Deveices</h5>
+              <p class="card-text">Number of devices : <strong>{{ deviceCount }}</strong></p>
+            </div>
+          </div>
+        </div>
+        <div  class="card-footer text-end">
+          <a routerLink="/devices" class="btn btn-warning btn-sm text-white">Devices management</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

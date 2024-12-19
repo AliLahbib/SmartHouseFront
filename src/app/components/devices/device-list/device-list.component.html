@@ -1,27 +1,27 @@
 <div class="container mt-4">
-  <h2>Gestion des Appareils</h2>
-  <button class="btn btn-primary mb-3" (click)="createDevice()">Ajouter un Appareil</button>
+  <h2>Device Management</h2>
+  <button *ngIf="isAdmin()|| isTechnician()" class="btn btn-primary mb-3" (click)="createDevice()">Create Device</button>
 
   <table class="table table-bordered table-hover">
     <thead class="table-dark">
     <tr>
-      <th>Nom</th>
+      <th>Name</th>
       <th>Type</th>
-      <th>Pièce Associée</th>
-      <th>Statut</th>
-      <th>Consommation (kWh)</th>
+      <th>Associated Room</th>
+      <th>Status</th>
+      <th>Consumption (kWh)</th>
       <th>Actions</th>
     </tr>
     </thead>
     <tbody>
-    <!-- Liste des appareils -->
+    <!-- Device list -->
     <tr *ngFor="let device of devices">
       <td>{{ device.name }}</td>
       <td>{{ device.type }}</td>
       <td>
-        {{ device.room ? device.room.name : 'Aucune pièce associée' }}
+        {{ device.room ? device.room.name : 'No associated room' }}
       </td>
-      <td>{{ device.status === 'on' ? 'Allumé' : 'Éteint' }}</td>
+      <td>{{ device.status === 'on' ? 'On' : 'Off' }}</td>
       <td>{{ device.consumption.toFixed(2) }}</td>
       <td>
         <!-- Actions -->
@@ -31,33 +31,33 @@
             class="btn btn-success btn-sm"
             (click)="turnOnDevice(device._id)"
           >
-            Allumer
+            Turn On
           </button>
           <button
             *ngIf="device.status === 'on'"
             class="btn btn-warning btn-sm"
             (click)="turnOffDevice(device._id)"
           >
-            Éteindre
+            Turn Off
           </button>
-          <button
+          <button *ngIf="isAdmin()|| isTechnician()"
             class="btn btn-primary btn-sm"
             (click)="editDevice(device._id)"
           >
-            Modifier
+            Edit
           </button>
-          <button
+          <button *ngIf="isAdmin()|| isTechnician()"
             class="btn btn-danger btn-sm"
             (click)="deleteDevice(device._id)"
           >
-            Supprimer
+            Delete
           </button>
         </div>
       </td>
     </tr>
-    <!-- Message si aucun appareil n'est trouvé -->
+    <!-- Message if no devices are found -->
     <tr *ngIf="devices.length === 0">
-      <td colspan="6" class="text-center text-muted">Aucun appareil trouvé.</td>
+      <td colspan="6" class="text-center text-muted">No devices found.</td>
     </tr>
     </tbody>
   </table>

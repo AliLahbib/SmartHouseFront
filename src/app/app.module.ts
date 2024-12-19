@@ -13,6 +13,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
 import { DeviceFormComponent } from './components/devices/device-form/device-form.component';
 import { DeviceListComponent } from './components/devices/device-list/device-list.component';
+import { LoginComponent } from './components/auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DeviceListComponent } from './components/devices/device-list/device-lis
     PieceFormComponent,
     NavbarComponent,
     DeviceFormComponent,
-    DeviceListComponent
+    DeviceListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule,HttpClientModule

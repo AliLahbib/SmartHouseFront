@@ -8,10 +8,13 @@ import {PieceFormComponent} from "./components/pieces/piece-form/piece-form.comp
 
 import {DeviceListComponent} from "./components/devices/device-list/device-list.component";
 import {DeviceFormComponent} from "./components/devices/device-form/device-form.component";
+import {AuthGuard} from "./services/auth.guard";
+import {LoginComponent} from "./components/auth/login/login.component";
 
 // Définir les routes ici
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'users', component: UserListComponent },
   { path: 'users/create', component: UserFormComponent },
   { path: 'users/edit/:id', component: UserFormComponent },
@@ -21,7 +24,7 @@ const routes: Routes = [
   { path: 'devices', component:DeviceListComponent},
   { path: 'devices/create' , component:  DeviceFormComponent },
   { path: 'devices/edit/:id' , component:  DeviceFormComponent },
-  { path: '**', redirectTo: 'users' } // Pas de slash ici non plus
+  { path: '**', redirectTo: '' } // Pas de slash ici non plus
 ];
 
 @NgModule({

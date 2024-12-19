@@ -1,9 +1,9 @@
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <label for="username">Nom d'utilisateur</label>
+    <label for="username">Username</label>
     <input id="username" class="form-control" formControlName="username" />
     <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched" class="text-danger">
-      Le nom d'utilisateur est requis.
+      Username is required.
     </div>
   </div>
 
@@ -11,61 +11,61 @@
     <label for="email">Email</label>
     <input id="email" class="form-control" formControlName="email" />
     <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="text-danger">
-      L'email est requis et doit être valide.
+      Email is required and must be valid.
     </div>
   </div>
+
   <div class="form-group">
     <div *ngIf="!isEditing">
-      <label for="password">Mot de passe</label>
+      <label for="password">Password</label>
       <input id="password" type="password" class="form-control" value=" " formControlName="password" [required]="!isEditing"/>
       <div *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched" class="text-danger">
-        Le mot de passe est requis.
+        Password is required.
       </div>
     </div>
   </div>
 
   <div class="form-group">
-    <label for="phone">Téléphone</label>
+    <label for="phone">Phone</label>
     <input id="phone" class="form-control" formControlName="phone" />
     <div *ngIf="userForm.get('phone')?.invalid && userForm.get('phone')?.touched" class="text-danger">
-      Le téléphone est requis.
+      Phone is required.
     </div>
   </div>
 
   <div class="form-group">
-    <label for="birthday">Date de naissance</label>
+    <label for="birthday">Birthday</label>
     <input id="birthday" type="date" class="form-control" formControlName="birthday" />
     <div *ngIf="userForm.get('birthday')?.invalid && userForm.get('birthday')?.touched" class="text-danger">
-      La date de naissance est requise.
+      Birthday is required.
     </div>
   </div>
 
   <div class="form-group">
-    <label for="role">Rôle</label>
+    <label for="role">Role</label>
     <select id="role" class="form-control" formControlName="role">
       <option value="admin">Admin</option>
-      <option value="user">Utilisateur</option>
-      <option value="technician">Technicien</option>
+      <option value="user">User</option>
+      <option value="technician">Technician</option>
     </select>
     <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched" class="text-danger">
-      Le rôle est requis.
+      Role is required.
     </div>
   </div>
 
   <div class="form-group">
-    <label for="pieces">Pièces associées</label>
+    <label for="pieces">Associated Rooms</label>
     <select id="pieces" class="form-control" formControlName="pieces" multiple>
       <option *ngFor="let piece of pieces" [value]="piece._id">
         {{ piece.name }}
       </option>
     </select>
     <div *ngIf="userForm.get('pieces')?.invalid && userForm.get('pieces')?.touched" class="text-danger">
-      Vous devez sélectionner au moins une pièce.
+      You must select at least one room.
     </div>
   </div>
 
   <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
-    {{ isEditing ? 'Mettre à jour' : 'Ajouter' }}
+    {{ isEditing ? 'Update' : 'Add' }}
   </button>
 </form>
-

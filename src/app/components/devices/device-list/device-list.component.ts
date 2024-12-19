@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../../../services/device.service';
 import { Device } from '../../../models/device.model';
 import {Router} from "@angular/router";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-device-list',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 export class DeviceListComponent implements OnInit {
   devices: Device[] = [];
 
-  constructor(private deviceService: DeviceService,private router:Router) {}
+  constructor(private deviceService: DeviceService,private authService:AuthService,private router:Router) {}
 
   ngOnInit(): void {
     this.loadDevices();
@@ -51,5 +52,18 @@ export class DeviceListComponent implements OnInit {
       })
     }
 
+  }
+
+
+  isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
+  }
+
+  isTechnician(): boolean {
+    return this.authService.getRole() === 'technician';
+  }
+
+  isUser(): boolean {
+    return this.authService.getRole() === 'user';
   }
 }

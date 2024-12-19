@@ -80,6 +80,7 @@ export class UserFormComponent {
         if (!userData.password) {
           userData.password = ''; // Force à une chaîne vide
         }
+        console.log("user for edit ",userData);
         this.userService.updateUser(this.userId, userData).subscribe((updatedUser) => {
           console.log('User updated successfully', updatedUser);
           this.userSaved.emit(updatedUser);
@@ -87,7 +88,7 @@ export class UserFormComponent {
         });
       } else {
         this.userService.createUser(userData).subscribe((newUser) => {
-          console.log('User created successfully', newUser);
+
           this.userSaved.emit(newUser);
           this.router.navigate(['/users']);
         });

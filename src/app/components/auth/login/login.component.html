@@ -1,0 +1,66 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow p-4" style="width: 25rem;">
+    <div class="card-body">
+      <h3 class="card-title text-center mb-4">Login</h3>
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+
+          <div class="form-group mb-3">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+              placeholder="Email"
+            />
+          <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="text-danger mt-1">
+            Please enter a valid email.
+          </div>
+        </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            formControlName="password"
+            placeholder="Password"
+          />
+          <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched" class="text-danger mt-1">
+            The password must contain at least 6 characters.
+          </div>
+        </div>
+        <div *ngIf="errorMessage" class="alert alert-danger mt-2">
+          {{ errorMessage }}
+        </div>
+        <button type="submit" class="btn btn-primary w-100 mt-3" [disabled]="loginForm.invalid">Log In</button>
+      </form>
+
+      <!-- Forgot Password Link -->
+      <div class="text-center mt-3">
+        <a class="text-decoration-underline" data-bs-toggle="modal" data-bs-target="#comingSoonModal" href="#">Forgot Password?</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for Forgot Password -->
+<div class="modal fade" id="comingSoonModal" tabindex="-1" aria-labelledby="comingSoonLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="comingSoonLabel">Coming Soon</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        This feature will be available soon. Stay tuned!
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,22 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">SmartHouse</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="#">
+      <img src="assets/home.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+      SmartHouse
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" routerLink="/">Accueil</a>
+          <a class="nav-link active text-uppercase" aria-current="page" routerLink="/">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/users">Utilisateurs</a>
+          <a *ngIf="isAdmin()" class="nav-link text-uppercase" routerLink="/users">Utilisateurs</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/pieces">Pieces</a>
+          <a *ngIf="(isAdmin() || isTechnician())" class="nav-link text-uppercase" routerLink="/pieces">Pièces</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/devices">Devices</a>
+          <a *ngIf="(isAdmin() || isTechnician() || isUser())" class="nav-link text-uppercase" routerLink="/devices">Devices</a>
+        </li>
+        <li *ngIf="isUser()||isTechnician()||isAdmin();else loginButton" class="nav-item">
+          <a  class="nav-link text-uppercase text-danger" routerLink (click)="logout()">Logout</a>
+        </li>
+        <ng-template #loginButton>
+          <a  class="nav-link text-uppercase text-danger" routerLink="/login" >Login</a>
+        </ng-template>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-light">Bienvenue</a>
         </li>
       </ul>
     </div>

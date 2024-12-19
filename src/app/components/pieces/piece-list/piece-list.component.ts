@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Piece} from "../../../models/piece.model";
 import {PieceService} from "../../../services/piece.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-piece-list',
@@ -11,7 +12,7 @@ import {Router} from "@angular/router";
 export class PieceListComponent implements OnInit {
   pieces: Piece[] = [];
 
-  constructor(private pieceService: PieceService, private router: Router) {}
+  constructor(private pieceService: PieceService, private router: Router,private authService:AuthService) {}
 
   ngOnInit(): void {
     this.loadPieces();
@@ -19,7 +20,7 @@ export class PieceListComponent implements OnInit {
 
   loadPieces(): void {
     this.pieceService.getPieces().subscribe(pieces => {
-      console.log("pieces", pieces);
+
       this.pieces = pieces;
     });
   }
@@ -37,6 +38,20 @@ export class PieceListComponent implements OnInit {
   }
 
   editPiece(id: string): void {
-    this.router.navigate(['/pieces/edit', id]);
+    this.router.navigate(['/pieces/edit', id]) ;
+  }
+
+
+
+  isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
+  }
+
+  isTechnician(): boolean {
+    return this.authService.getRole() === 'technician';
+  }
+
+  isUser(): boolean {
+    return this.authService.getRole() === 'user';
   }
 }

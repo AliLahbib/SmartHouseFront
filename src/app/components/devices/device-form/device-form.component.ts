@@ -5,6 +5,7 @@ import { PieceService } from '../../../services/piece.service'; // Pour récupé
 import { ActivatedRoute, Router } from '@angular/router';
 import { Device } from '../../../models/device.model';
 import { Piece } from '../../../models/piece.model';
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'app-device-form',
@@ -21,7 +22,8 @@ export class DeviceFormComponent implements OnInit {
     private deviceService: DeviceService,
     private pieceService: PieceService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private authService:AuthService
   ) {
     this.deviceForm = this.fb.group({
       name: ['', [Validators.required]],
@@ -29,7 +31,7 @@ export class DeviceFormComponent implements OnInit {
       room: [''], // Ajout de la pièce
       specificParams: this.fb.group({
         color: [''],
-        powerConsumption: [0, [Validators.required, Validators.min(0)]],
+        powerConsumption: [10, [Validators.required, Validators.min(0)]],
       }),
     });
   }
@@ -50,7 +52,7 @@ export class DeviceFormComponent implements OnInit {
           room: device.room?._id || '', // Charger l'ID de la pièce
           specificParams: {
             color: device.specificParams?.color || '',
-            powerConsumption: device.specificParams?.powerConsumption || 0,
+            powerConsumption: device.specificParams?.powerConsumption || 10,
           },
         });
       });
@@ -76,6 +78,20 @@ export class DeviceFormComponent implements OnInit {
         });
       }
     }
+  }
+
+
+
+  isAdmin(): boolean {
+    return this.authService.getRole() === 'admin';
+  }
+
+  isTechnician(): boolean {
+    return this.authService.getRole() === 'technician';
+  }
+
+  isUser(): boolean {
+    return this.authService.getRole() === 'user';
   }
 
 }
